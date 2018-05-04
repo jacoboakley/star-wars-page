@@ -24,6 +24,8 @@ body {
 
 .nav-link {
   width: 100%;
+  
+  cursor: pointer;
 }
 
 .info {
