@@ -81,8 +81,25 @@ const displayInfo = () => {
         
         $('.info').html('');
         
-        for (let i = 0; i < Object.keys(response).length; i++) {
-          $('.info').append(`<div class='results text-center'><h3>${results[i]}</h3><p>${value[i]}</p></div>`);
+        for (let i = 0; i < results.length; i++) {
+          
+          if (typeof(value[i]) === 'object') {
+            $('.info').append(`<div class='results text-center'><h3>${results[i]}</h3><div class='${results[i]}'></div></div>`);
+            for (let item of value[i]) {
+              
+              $.ajax({
+                type: 'GET',
+                url: item,
+                success: (response) => {
+                  $(`.${results[i]}`).append(`<p>${Object.values(response)[0]}</p>`);
+                  console.log(response.name);
+                }
+              });
+            }
+          }
+          else {
+            $('.info').append(`<div class='results text-center'><h3>${results[i]}</h3><p>${value[i]}</p></div>`);  
+          }
         }
         
       },
