@@ -1,39 +1,45 @@
 body {
-  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
   width: 100vw;
-}
-
-.nav {
-  height: 100%;
-  width: 10vw;
-  
-  background: #ecf0f1;
-}
-
-.dropdown {
-  margin-top: 20px;
-}
-
-.content {
-  height: 90%;
-  margin-top: 20px;
-
-  border-top: 1px solid black;
-  overflow: scroll;
-}
-
-.nav-link {
-  width: 100%;
-  
-  cursor: pointer;
-}
-
-.info {
-  height: 100vh;
-  overflow: scroll;
-  width: 90vw;
   
   background: rgb(0,0,0);
   background: rgba(0,0,0,.65);
 }
 
+.input-group {
+  width: 50%;
+  max-width: 500px;
+}
+
+.dropdown-toggle {
+  width: 100px;
+}
+
+.dropdown-item {
+  cursor: pointer;
+}
+
+.btn:active {
+  border: none;
+}
+
+.btn-link {
+  color: white;
+}
+
+.btn-link:hover {
+  color: black;
+}
+
+
+
+.content {
+  width: 80vw;
+}
+
+.info {
+  width: 80vw;
+}

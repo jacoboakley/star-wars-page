@@ -8,15 +8,12 @@ const getKeys = () => {
     url: 'https://swapi.co/api/',
     success: (response) => {
       
-      /* Makes an array from the Object returned by the API */
-      let category = Object.keys(response);
-      
-      /* Alpahbitize keys */
-      category.sort();
+      /* Get the keys of the Object returned by the API and Alphabitize them */
+      const category = Object.keys(response).sort();
       
       /* Loop through the array and create an item in the dropdown menu for each key */
       for(let i = 0; i < category.length; i++) {
-        $('.dropdown-menu').append(`<a class='category dropdown-item' id='${category[i]}' data-url='https://swapi.co/api/${category[i]}'>${category[i]}</a>`);
+        $('.dropdown-menu').append(`<a class='dropdown-item' id='${category[i]}' data-url='https://swapi.co/api/${category[i]}'>${category[i]}</a>`);
       }
       
     }
@@ -31,7 +28,7 @@ const getResults = () => {
     
     let category = event.target.id;
     let url = event.target.getAttribute('data-url');
-    
+    console.log(url);
     /* Clear content Html */
     $('.content').html('');
     
@@ -48,15 +45,19 @@ const getResults = () => {
             url: `${url}/?page=${p}`,
             success: (response) => {
               
+              $('.info').html('');
+              $('.dropdown-toggle').html(category)
+              
               response.results.forEach((item) => {
+                
                 if (category === 'films') {
-                  $('.content').append(`<a class='nav-link' id='${category}' data-url='${item.url}'>${item.title}</a>`);
+                  $('.content').append(`<h3 class='btn btn-link' id='${category}' data-url='${item.url}'>${item.title}</h3>`);
                 }
                 else {
-                  $('.content').append(`<a class='nav-link' id='${category}' data-url='${item.url}'>${item.name}</a>`);
+                  $('.content').append(`<h3 class='btn btn-link' id='${category}' data-url='${item.url}'>${item.name}</h3>`);
                 }
+                
               });
-              
             }
           });
         }        
@@ -80,6 +81,7 @@ const displayInfo = () => {
         let value = Object.values(response);
         
         $('.info').html('');
+        $('.content').html('');
         
         for (let i = 0; i < results.length; i++) {
           

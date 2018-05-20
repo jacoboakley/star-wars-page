@@ -3,8 +3,11 @@
 	
 	
 	<head>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118653703-1"></script>
+		<meta charset='utf-8'>
+		<title>Star Wars</title>
+		
+<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src='https://www.googletagmanager.com/gtag/js?id=UA-118653703-1'></script>
 		<script>
   		window.dataLayer = window.dataLayer || [];
   		function gtag(){dataLayer.push(arguments);}
@@ -12,13 +15,8 @@
 
   		gtag('config', 'UA-118653703-1');
 		</script>
-
 		
 		
-		
-		
-		<meta charset='utf-8'>
-		<title>Star Wars</title>
 <!-- jQuery -->		
 		<script src='https://code.jquery.com/jquery-3.3.1.min.js' integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=' crossorigin='anonymous'></script>
 <!-- Bootstrap -->
@@ -32,16 +30,26 @@
 	</head>
 	
 	
-	<body class='d-flex'>
-		<nav class='nav justify-content-center' role='navigation'>
-		  <div class='dropdown'>
-  			<button class='btn btn-outline-dark dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-  				Category
-		  		<div class='dropdown-menu dropdown-menu-left nav-item' aria-labelledby='dropdownMenuButton'></div>
-    		</button>
+	<body class='d-flex flex-column align-items-center justify-content-around'>
+		
+		<div class='mb-5 mt-5 text-center'>
+			<h1>STAR WARS INFO</h1>
+			<h3>from SWAPI</h3>
+		</div>
+		
+		
+		<div class='input-group mb-5'>
+  		<div class='input-group-prepend'>
+    		<button class='btn btn-dark dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Category</button>
+    		<div class='dropdown-menu dropdown-menu-left nav-item' aria-labelledby='dropdownMenuButton'></div>
   		</div>
-  		<div class='content nav justify-content-start'></div>
-		</nav>
+  		<input type='text' class='form-control' aria-label='Text input with dropdown button' placeholder='Keyword'>
+  		<div class='input-group-append'>
+    		<button class='btn btn-light' type='button'>Search</button>
+  		</div>
+		</div>
+		
+		<div class='content d-flex flex-wrap'></div>
 		<div class='info'></div>
 	</body>
 </html>
