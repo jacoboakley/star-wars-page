@@ -28,7 +28,6 @@ const getResults = () => {
     
     let category = event.target.id;
     let url = event.target.getAttribute('data-url');
-    console.log(url);
     /* Clear content Html */
     $('.content').html('');
     
@@ -51,10 +50,20 @@ const getResults = () => {
               response.results.forEach((item) => {
                 
                 if (category === 'films') {
-                  $('.content').append(`<h3 class='btn btn-link' id='${category}' data-url='${item.url}'>${item.title}</h3>`);
+                  $('.content').append(`
+                    <div class='d-flex flex-column m-5 card'>
+                      <img src='http://via.placeholder.com/200x300' id='${category}' data-url='${item.url}'/>
+                      <h3 class='btn btn-link' id='${category}' data-url='${item.url}'>${item.title}</h3>
+                    </div>
+                  `);
                 }
                 else {
-                  $('.content').append(`<h3 class='btn btn-link' id='${category}' data-url='${item.url}'>${item.name}</h3>`);
+                  $('.content').append(`
+                    <div class='d-flex flex-column m-5 card'>
+                      <img src='http://via.placeholder.com/200x300' id='${category}' data-url='${item.url}'/>
+                      <h3 class='btn btn-link' id='${category}' data-url='${item.url}'>${item.name}</h3>
+                    </div>
+                  `);
                 }
                 
               });
@@ -94,7 +103,6 @@ const displayInfo = () => {
                 url: item,
                 success: (response) => {
                   $(`.${results[i]}`).append(`<p>${Object.values(response)[0]}</p>`);
-                  console.log(response.name);
                 }
               });
             }
@@ -109,12 +117,36 @@ const displayInfo = () => {
   });
 };
 
+const keywordSearch = () => {
+  $('#search').click(() => {
+    
+    let userInput = $('#input').val();
+    let category = $('#category').text();
+    
+    if (category === 'Category') {
+      alert('Please select a category to search');
+    }
+    else {
+    
+      let url = `https://swapi.co/api/${category}/?search=${userInput}`;
+      $.ajax({
+        type: 'GET',
+        url: url,
+        success: (response) => {
+          alert(JSON.stringify(response));
+        }
+      });
+    }
+  });
+};
+
 
 $(document).ready(() => {
   
   getKeys();
   getResults();
   displayInfo();
+  keywordSearch();
 
 });
 
