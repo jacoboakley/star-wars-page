@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html lang='en-us'>
 	
-	
 	<head>
 		<meta charset='utf-8'>
 		<title>Star Wars</title>
-		
 <!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src='https://www.googletagmanager.com/gtag/js?id=UA-118653703-1'></script>
 		<script>
   		window.dataLayer = window.dataLayer || [];
   		function gtag(){dataLayer.push(arguments);}
   		gtag('js', new Date());
-
   		gtag('config', 'UA-118653703-1');
 		</script>
-		
-		
 <!-- jQuery -->		
 		<script src='https://code.jquery.com/jquery-3.3.1.min.js' integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=' crossorigin='anonymous'></script>
 <!-- Bootstrap -->
@@ -28,15 +23,14 @@
 <!-- Stylesheets -->
 		<link rel='stylesheet' type='text/css' href='./styles/index.css' />
 	</head>
-	
-	
+<!-- Start -->
 	<body class='d-flex flex-column align-items-center justify-content-around'>
-		
+<!-- Heading -->	
 		<div class='mb-5 mt-5 text-center'>
 			<h1>STAR WARS INFO</h1>
 			<h3>from SWAPI</h3>
 		</div>
-		
+<!-- Search Bar -->		
 		<div class='input-group mb-5'>
   		<div class='input-group-prepend'>
     		<button class='btn btn-dark dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Category</button>
@@ -47,9 +41,9 @@
     		<button class='btn btn-light' id='search' type='button'>Search</button>
   		</div>
 		</div>
-		
+<!-- Content -->		
 		<div class='content d-flex flex-wrap'></div>
 		<div class='info'></div>
-		
 	</body>
+<!-- End -->	
 </html>

@@ -46,14 +46,18 @@ const getResults = () => {
             success: (response) => {
               
 /* Show the selected category in dropdown */
-              $('.dropdown-toggle').html(category)
+              $('.dropdown-toggle').html(category);
               
               response.results.forEach((item) => {
+
+               let itemNum = item.url.split('/')[5];
+               console.log(item.name + ' ' + itemNum);
+               
                 
                 if (category === 'films') {
                   $('.content').append(`
                     <div class='d-flex flex-column m-5 card'>
-                      <img src='./assets/images/${category}/${item.title}.jpg' id='${category}' data-url='${item.url}'/>
+                      <img src='./assets/images/${category}/${itemNum}.jpg' id='${category}' data-url='${item.url}'/>
                       <h3 class='btn btn-link' id='${category}' data-url='${item.url}'>${item.title}</h3>
                     </div>
                   `);
@@ -61,7 +65,7 @@ const getResults = () => {
                 else {
                   $('.content').append(`
                     <div class='d-flex flex-column m-5 card'>
-                      <img src='./assets/images/${category}/${item.name}.jpg' id='${category}' data-url='${item.url}'/>
+                      <img src='./assets/images/${category}/${itemNum}.jpg' id='${category}' data-url='${item.url}'/>
                       <h3 class='btn btn-link' id='${category}' data-url='${item.url}'>${item.name}</h3>
                     </div>
                   `);
