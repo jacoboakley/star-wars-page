@@ -1,7 +1,7 @@
 /* global $ */
 
 
-// Used to clear HTML for 
+// Used to clear displayed content and info
 const clear = () => {
   $('.content').html('');
   $('.info').html('');
@@ -33,9 +33,9 @@ const getResults = () => {
     
     let category = event.target.id;
     let url = event.target.getAttribute('data-url');
+    
     /* Clear content and info from page */
-    $('.content').html('');
-    $('.info').html('');
+    clear();
     
     /* Replace content Html with retrieved data*/  
     $.ajax({
@@ -52,7 +52,7 @@ const getResults = () => {
             url: `${url}/?page=${p}`,
             success: (response) => {
               
-/* Show the selected category in dropdown */
+              /* Show the selected category in dropdown */
               $('.dropdown-toggle').html(category.toUpperCase());
               
               response.results.forEach((item) => {
@@ -92,39 +92,39 @@ const displayInfo = () => {
     let category = event.target.id;
     let url = event.target.getAttribute('data-url');
     
-    $.ajax({
-      type: 'GET',
-      url: url,
-      success: (response) => {
-        
-        let results = Object.keys(response);
-        let value = Object.values(response);
-        
-        $('.info').html('');
-        $('.content').html('');
-        
-        for (let i = 0; i < results.length; i++) {
+    if(typeof(url) === 'string') {
+      $.ajax({
+        type: 'GET',
+        url: url,
+        success: (response) => {
           
-          if (typeof(value[i]) === 'object') {
-            $('.info').append(`<div class='results text-center'><h3>${results[i]}</h3><div class='${results[i]}'></div></div>`);
-            for (let item of value[i]) {
-              
-              $.ajax({
-                type: 'GET',
-                url: item,
-                success: (response) => {
-                  $(`.${results[i]}`).append(`<p>${Object.values(response)[0]}</p>`);
-                }
-              });
+          let results = Object.keys(response);
+          let value = Object.values(response);
+          /* Clear content and info from page */
+          clear();
+          
+          for (let i = 0; i < results.length; i++) {
+            
+            if (typeof(value[i]) === 'object') {
+              $('.info').append(`<div class='results text-center'><h3>${results[i]}</h3><div class='${results[i]}'></div></div>`);
+              for (let item of value[i]) {
+                
+                $.ajax({
+                  type: 'GET',
+                  url: item,
+                  success: (response) => {
+                    $(`.${results[i]}`).append(`<p>${Object.values(response)[0]}</p>`);
+                  }
+                });
+              }
+            }
+            else {
+              $('.info').append(`<div class='results text-center'><h3>${results[i]}</h3><p>${value[i]}</p></div>`);  
             }
           }
-          else {
-            $('.info').append(`<div class='results text-center'><h3>${results[i]}</h3><p>${value[i]}</p></div>`);  
-          }
-        }
-        
-      },
-    });
+        },
+      });
+    }
   });
 };
 
@@ -136,7 +136,7 @@ const keywordSearch = () => {
       alert('Please select a category to search');
     }
     else {
-      
+      /* Clear content and info from page */
       clear();
     
       let url = `https://swapi.co/api/${category}/?search=${userInput}`;
@@ -146,35 +146,26 @@ const keywordSearch = () => {
         success: (response) => {
           response.results.forEach((item) => {
 
-               let itemNum = item.url.split('/')[5];
+            let itemNum = item.url.split('/')[5];
                
                 
-                if (category === 'films') {
-                  $('.content').append(`
-                    <div class='d-flex flex-column m-5 card'>
-                      <img src='./assets/images/${category}/${itemNum}.jpg' id='${category}' data-url='${item.url}'/>
-                      <h3 class='btn btn-link' id='${category}' data-url='${item.url}'>${item.title}</h3>
-                    </div>
-                  `);
-                }
-                else {
-                  $('.content').append(`
-                    <div class='d-flex flex-column m-5 card'>
-                      <img src='./assets/images/${category}/${itemNum}.jpg' id='${category}' data-url='${item.url}'/>
-                      <h3 class='btn btn-link' id='${category}' data-url='${item.url}'>${item.name}</h3>
-                    </div>
-                  `);
-                }
-                
-              });
-          
-          
-          
-          
-          
-          
-          
-          
+            if (category === 'films') {
+              $('.content').append(`
+                <div class='d-flex flex-column m-5 card'>
+                  <img src='./assets/images/${category}/${itemNum}.jpg' id='${category}' data-url='${item.url}'/>
+                  <h3 class='btn btn-link' id='${category}' data-url='${item.url}'>${item.title}</h3>
+                </div>
+              `);
+            }
+            else {
+              $('.content').append(`
+                <div class='d-flex flex-column m-5 card'>
+                  <img src='./assets/images/${category}/${itemNum}.jpg' id='${category}' data-url='${item.url}'/>
+                  <h3 class='btn btn-link' id='${category}' data-url='${item.url}'>${item.name}</h3>
+                </div>
+              `);
+            }
+          });
         }
       });
     }
