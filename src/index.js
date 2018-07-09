@@ -144,10 +144,6 @@ const keywordSearch = () => {
         type: 'GET',
         url: url,
         success: (response) => {
-          alert(JSON.stringify(response.results));
-          
-          
-          
           response.results.forEach((item) => {
 
                let itemNum = item.url.split('/')[5];
