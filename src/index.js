@@ -1,5 +1,12 @@
 /* global $ */
 
+
+// Used to clear HTML for 
+const clear = () => {
+  $('.content').html('');
+  $('.info').html('');
+};
+
 const getKeys = () => {
   $.ajax({
     type: 'GET',
@@ -11,7 +18,7 @@ const getKeys = () => {
       
       /* Loop through the array and create an item in the dropdown menu for each key */
       for(let i = 0; i < category.length; i++) {
-        $('.dropdown-menu').append(`<a class='dropdown-item' id='${category[i]}' data-url='https://swapi.co/api/${category[i]}'>${category[i]}</a>`);
+        $('.dropdown-menu').append(`<a class='dropdown-item' id='${category[i]}' data-url='https://swapi.co/api/${category[i]}'>${category[i].toUpperCase()}</a>`);
       }
       
     }
@@ -46,12 +53,11 @@ const getResults = () => {
             success: (response) => {
               
 /* Show the selected category in dropdown */
-              $('.dropdown-toggle').html(category);
+              $('.dropdown-toggle').html(category.toUpperCase());
               
               response.results.forEach((item) => {
 
                let itemNum = item.url.split('/')[5];
-               console.log(item.name + ' ' + itemNum);
                
                 
                 if (category === 'films') {
@@ -124,21 +130,55 @@ const displayInfo = () => {
 
 const keywordSearch = () => {
   $('#search').click(() => {
-    
     let userInput = $('#input').val();
-    let category = $('#category').text();
-    
-    if (category === 'Category') {
+    let category = $('.dropdown-toggle').html().toLowerCase();
+    if (category === 'category') {
       alert('Please select a category to search');
     }
     else {
+      
+      clear();
     
       let url = `https://swapi.co/api/${category}/?search=${userInput}`;
       $.ajax({
         type: 'GET',
         url: url,
         success: (response) => {
-          alert(JSON.stringify(response));
+          alert(JSON.stringify(response.results));
+          
+          
+          
+          response.results.forEach((item) => {
+
+               let itemNum = item.url.split('/')[5];
+               
+                
+                if (category === 'films') {
+                  $('.content').append(`
+                    <div class='d-flex flex-column m-5 card'>
+                      <img src='./assets/images/${category}/${itemNum}.jpg' id='${category}' data-url='${item.url}'/>
+                      <h3 class='btn btn-link' id='${category}' data-url='${item.url}'>${item.title}</h3>
+                    </div>
+                  `);
+                }
+                else {
+                  $('.content').append(`
+                    <div class='d-flex flex-column m-5 card'>
+                      <img src='./assets/images/${category}/${itemNum}.jpg' id='${category}' data-url='${item.url}'/>
+                      <h3 class='btn btn-link' id='${category}' data-url='${item.url}'>${item.name}</h3>
+                    </div>
+                  `);
+                }
+                
+              });
+          
+          
+          
+          
+          
+          
+          
+          
         }
       });
     }
