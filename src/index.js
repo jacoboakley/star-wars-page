@@ -1,11 +1,13 @@
 /* global $ */
 
-
-// Used to clear displayed content and info
+/* Used to clear displayed content and info */
+ 
 const clear = () => {
   $('.content').html('');
   $('.info').html('');
 };
+
+/* Get keys for selection in dropdown menu */
 
 const getKeys = () => {
   $.ajax({
@@ -25,6 +27,7 @@ const getKeys = () => {
   });
 };
 
+/* Displays results of query with image */
 
 const getResults = () => {
   
@@ -86,6 +89,8 @@ const getResults = () => {
   });
 };
 
+/* Displays info for the selected result */
+
 const displayInfo = () => {
   $('.content').on('click', () => {
     
@@ -127,6 +132,8 @@ const displayInfo = () => {
     }
   });
 };
+
+/* Queries the API using selected category and keyword */
 
 const keywordSearch = () => {
   $('#search').click(() => {
@@ -171,6 +178,9 @@ const keywordSearch = () => {
     }
   });
 };
+
+/*  */
+
 
 $(document).ready(() => {
   
