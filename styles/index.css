@@ -1,7 +1,7 @@
 body {
   background-color: rgb(0,0,0);
   background: url('../assets/images/stars.jpg');
-  background-size: 600px 400px;
+  background-size: 100vw 100vh;
   
   color: white;
 }

@@ -179,7 +179,6 @@ const keywordSearch = () => {
   });
 };
 
-/*  */
 
 
 $(document).ready(() => {
